@@ -1,4 +1,4 @@
-function montageList = framemontage(folderLeft, folderRight, output)
+function montageList = FrameMontage(folderLeft, folderRight, output)
 
 if nargout > 0
     remember = true;
@@ -21,6 +21,7 @@ end
 
 readfile = @(dir, f) imread(fullfile(dir, f));
 savefile = @(img, name) imwrite(img, fullfile(output, name));
+eta = ETA(tic, fileCount);
 for f=1:fileCount
     imgL = readfile(folderLeft , dirLeft(f).name);
     imgR = readfile(folderRight, dirRight(f).name);
@@ -38,7 +39,7 @@ for f=1:fileCount
     end
     savefile(montage, dirLeft(f).name);
     
-    fprintf('%i\n', f);
+    eta.update(); eta.print();
 end
 
 

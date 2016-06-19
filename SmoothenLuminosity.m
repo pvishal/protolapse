@@ -29,16 +29,16 @@ while(~strcmpi(inputChar,'d'))
     if strcmpi(inputChar,'m');
         if strcmpi(method, 'lowpass')
             method = 'loess';
-            factor = 6;
+            factor = 0.5;
         elseif strcmpi(method, 'loess')
             method = 'lowpass';
-            factor = 1;
+            factor = 0.5;
         end
     elseif strcmpi(inputChar, 'a')
         if strcmpi(method, 'lowpass')
             factor = max(factor/2, 0);
         elseif strcmpi(method, 'loess')
-            factor = min(factor*2, 50);
+            factor = min(factor*2, 1);
         end
     elseif strcmpi(inputChar, 's')
         if strcmpi(method, 'lowpass')
@@ -57,7 +57,7 @@ while(~strcmpi(inputChar,'d'))
     end
     
     sCurveHandle = plot(smoothCurve, 'r');
-    title(sprintf('%s, %d', method, factor));
+    title(sprintf('%s, %f', method, factor));
     
 end
 
